@@ -1,7 +1,7 @@
 require './lib/monte-carlo-roadmap/simulator/simulator'
 require './lib/monte-carlo-roadmap/simulator/simulator_builder'
 
-RSpec.describe Simulator do
+RSpec.describe MonteCarloRoadmap::Simulator do
 
   let(:metadata) {
     build(:metadata, teams: %w(iOS Android API))

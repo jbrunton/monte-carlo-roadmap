@@ -1,6 +1,6 @@
 require './lib/monte-carlo-roadmap/inputs/backlog'
 
-RSpec.describe Backlog do
+RSpec.describe MonteCarloRoadmap::Backlog do
   let(:items) {
     [
         { name: 'Epic 1', estimates: { Android: 'S', iOS: 'S', API: 'M' } },

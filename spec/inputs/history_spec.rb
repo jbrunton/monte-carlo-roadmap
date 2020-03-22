@@ -1,6 +1,6 @@
 require './lib/monte-carlo-roadmap/inputs/history'
 
-RSpec.describe History do
+RSpec.describe MonteCarloRoadmap::History do
 
   let(:epic_sizes) {
     {

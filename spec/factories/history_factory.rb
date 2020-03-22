@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :history do
+  factory :history, class: 'MonteCarloRoadmap::History' do
     epic_sizes {
       {
           S: [1, 4],

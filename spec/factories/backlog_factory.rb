@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :backlog do
+  factory :backlog, class: 'MonteCarloRoadmap::Backlog' do
     items {
       [
           { name: 'Epic 1', estimates: { 'Android': 'S', 'iOS': 'S', 'API': 'M' } },
