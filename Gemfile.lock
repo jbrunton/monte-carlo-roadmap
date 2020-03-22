@@ -2,6 +2,7 @@ PATH
   remote: .
   specs:
     monte-carlo-roadmap (0.1.0)
+      activesupport (~> 6.0)
       config (~> 2.2)
       recursive-open-struct (~> 1.1)
 
@@ -14,6 +15,7 @@ GEM
       minitest (~> 5.1)
       tzinfo (~> 1.1)
       zeitwerk (~> 2.2)
+    coderay (1.1.2)
     concurrent-ruby (1.1.6)
     config (2.2.1)
       deep_merge (~> 1.2, >= 1.2.1)
@@ -62,7 +64,11 @@ GEM
       activesupport (>= 4.2.0)
     i18n (1.8.2)
       concurrent-ruby (~> 1.0)
+    method_source (1.0.0)
     minitest (5.14.0)
+    pry (0.13.0)
+      coderay (~> 1.1)
+      method_source (~> 1.0)
     rake (13.0.1)
     recursive-open-struct (1.1.1)
     rspec (3.9.0)
@@ -90,6 +96,7 @@ DEPENDENCIES
   bundler (~> 1.17)
   factory_bot (~> 5.1)
   monte-carlo-roadmap!
+  pry
   rake (~> 13.0)
   rspec (~> 3.9)
 

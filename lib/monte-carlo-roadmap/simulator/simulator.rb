@@ -11,12 +11,17 @@ module MonteCarloRoadmap
     end
 
     def play
-      @metadata.teams.map do |team|
+      results = @metadata.teams.map do |team|
         plays = (0..PLAY_COUNT)
                     .collect { play_once(team) }
                     .sort_by { |play| play.weeks }
         summarize(plays, team)
       end
+      OpenStruct.new(
+          seed: @history.random.seed,
+          timestamp: Time.now.utc,
+          results: results
+      )
     end
 
     def play_once(team)
