@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :simulator do
+  factory :simulator, class: 'MonteCarloRoadmap::Simulator' do
     metadata
     backlog
     history

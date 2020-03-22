@@ -1,6 +1,6 @@
 require './lib/monte-carlo-roadmap/inputs/metadata'
 
-RSpec.describe Metadata do
+RSpec.describe MonteCarloRoadmap::Metadata do
 
   let(:teams) { %w(iOS Android API) }
   let(:hourly_cost) { 80 }
