@@ -27,9 +27,9 @@ module MonteCarloRoadmap
 
           if ENV['save']
             save_results(results)
+          else
+            print_results(results)
           end
-
-          print_results(results)
         end
       end
     end
@@ -53,8 +53,9 @@ module MonteCarloRoadmap
 
     def save_results(results)
       FileUtils.mkdir_p output_path
-      File.open("#{output_path}/forecast.yml", 'w') do |file|
+      File.open("#{output_path}/forecast-#{Time.now.utc.strftime("%Y%m%d%H%M%S")}.yml", 'w') do |file|
         file.write results.map{ |result| result.deep_stringify_keys }.to_yaml
+        puts "Forecast saved to #{Pathname.new(file.path).relative_path_from(Dir.pwd).to_s}"
       end
     end
   end
