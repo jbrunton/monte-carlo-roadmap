@@ -25,9 +25,10 @@ module MonteCarloRoadmap
       namespace :simulator do
         desc 'Run the simulator'
         task name do
+          seed = Integer(ENV['seed']) unless ENV['seed'].nil?
           simulator = MonteCarloRoadmap::SimulatorBuilder.new
                           .input_files(input_files)
-                          .seed(Integer(ENV['seed']))
+                          .seed(seed)
                           .build
           forecast = simulator.play
 
@@ -47,6 +48,7 @@ module MonteCarloRoadmap
 
     def print_results(forecast)
       puts "Seed: #{forecast.seed}"
+      puts "Timestamp: #{forecast.timestamp}"
       forecast.results.each do |summary|
         puts "Team: #{summary[:team]}"
         {

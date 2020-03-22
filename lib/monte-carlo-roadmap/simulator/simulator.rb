@@ -19,6 +19,7 @@ module MonteCarloRoadmap
       end
       OpenStruct.new(
           seed: @history.random.seed,
+          timestamp: Time.now.utc,
           results: results
       )
     end
