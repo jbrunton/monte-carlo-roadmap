@@ -14,6 +14,10 @@ module MonteCarloRoadmap
     attr_accessor :output_path
     attr_accessor :output_format
 
+    def seed
+      Integer(ENV['seed']) unless ENV['seed'].nil?
+    end
+
     def initialize(name=:run, &init_block)
       @output_path = DEFAULT_OUTPUT_PATH
       @output_format = :console
@@ -25,7 +29,6 @@ module MonteCarloRoadmap
       namespace :simulator do
         desc 'Run the simulator'
         task name do
-          seed = Integer(ENV['seed']) unless ENV['seed'].nil?
           simulator = MonteCarloRoadmap::SimulatorBuilder.new
                           .input_files(input_files)
                           .seed(seed)
