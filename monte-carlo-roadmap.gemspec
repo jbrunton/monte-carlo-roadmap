@@ -1,11 +1,11 @@
 
 lib = File.expand_path("../lib", __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require "monte/carlo/roadmap/version"
+require "monte-carlo-roadmap/version"
 
 Gem::Specification.new do |spec|
   spec.name          = "monte-carlo-roadmap"
-  spec.version       = Monte::Carlo::Roadmap::VERSION
+  spec.version       = MonteCarloRoadmap::VERSION
   spec.authors       = ["John Brunton"]
   spec.email         = ["jbrunton@zipcar.co.uk"]
 
