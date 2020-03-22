@@ -25,14 +25,17 @@ module MonteCarloRoadmap
       namespace :simulator do
         desc 'Run the simulator'
         task name do
-          simulator = MonteCarloRoadmap::SimulatorBuilder.new.input_files(input_files).build
-          results = simulator.play
+          simulator = MonteCarloRoadmap::SimulatorBuilder.new
+                          .input_files(input_files)
+                          .seed(Integer(ENV['seed']))
+                          .build
+          forecast = simulator.play
 
           case output_format
           when :console
-              print_results(results)
+            print_results(forecast)
           when :yaml
-            save_results(results)
+            save_results(forecast)
           else
             raise "Unexpected output format: #{output_format}. Should be :console or :yaml"
           end
@@ -42,8 +45,9 @@ module MonteCarloRoadmap
 
     private
 
-    def print_results(results)
-      results.each do |summary|
+    def print_results(forecast)
+      puts "Seed: #{forecast.seed}"
+      forecast.results.each do |summary|
         puts "Team: #{summary[:team]}"
         {
             10 => summary[:percentile_10],
@@ -57,10 +61,10 @@ module MonteCarloRoadmap
       end
     end
 
-    def save_results(results)
+    def save_results(forecast)
       FileUtils.mkdir_p output_path
       File.open("#{output_path}/forecast-#{Time.now.utc.strftime("%Y%m%d%H%M%S")}.yml", 'w') do |file|
-        file.write results.map{ |result| result.deep_stringify_keys }.to_yaml
+        file.write forecast.to_h.deep_stringify_keys.to_yaml
         puts "Forecast saved to #{Pathname.new(file.path).relative_path_from(Dir.pwd).to_s}"
       end
     end

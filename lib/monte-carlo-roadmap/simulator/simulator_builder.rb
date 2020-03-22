@@ -19,7 +19,8 @@ module MonteCarloRoadmap
     end
 
     def seed(seed)
-      @seed = nil
+      @seed = seed
+      self
     end
 
     def build
