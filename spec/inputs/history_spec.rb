@@ -36,7 +36,7 @@ RSpec.describe History do
   it "samples epic size" do
     stub_rand_and_return(subject.random, [0, 1, 0])
     sizes = (0..2).collect { subject.sample_epic_size('S') }
-    expect(sizes).to eq([1, 4, 2])
+    expect(sizes).to eq([1, 4, 1])
   end
 
   it "samples throughput" do
