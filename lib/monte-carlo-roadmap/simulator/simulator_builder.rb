@@ -1,8 +1,8 @@
 require 'config'
-require './lib/monte-carlo-roadmap/inputs/metadata'
-require './lib/monte-carlo-roadmap/inputs/backlog'
-require './lib/monte-carlo-roadmap/inputs/history'
-require './lib/monte-carlo-roadmap/simulator/simulator'
+require 'monte-carlo-roadmap/inputs/metadata'
+require 'monte-carlo-roadmap/inputs/backlog'
+require 'monte-carlo-roadmap/inputs/history'
+require 'monte-carlo-roadmap/simulator/simulator'
 
 class SimulatorBuilder
   def input_files(input_files)
