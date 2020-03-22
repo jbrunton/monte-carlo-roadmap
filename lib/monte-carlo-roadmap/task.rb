@@ -12,23 +12,29 @@ module MonteCarloRoadmap
 
     attr_accessor :input_files
     attr_accessor :output_path
+    attr_accessor :output_format
 
-    def initialize(&init_block)
+    def initialize(name=:run, &init_block)
       @output_path = DEFAULT_OUTPUT_PATH
+      @output_format = :console
+
       init_block.call(self) unless init_block.nil?
 
       raise "Task must be configured to specify input files" if input_files.nil?
 
       namespace :simulator do
         desc 'Run the simulator'
-        task :play do
+        task name do
           simulator = MonteCarloRoadmap::SimulatorBuilder.new.input_files(input_files).build
           results = simulator.play
 
-          if ENV['save']
+          case output_format
+          when :console
+              print_results(results)
+          when :yaml
             save_results(results)
           else
-            print_results(results)
+            raise "Unexpected output format: #{output_format}. Should be :console or :yaml"
           end
         end
       end
