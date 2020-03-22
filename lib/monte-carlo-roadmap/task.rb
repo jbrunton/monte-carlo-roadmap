@@ -1,14 +1,20 @@
 require 'monte-carlo-roadmap/simulator/simulator_builder'
 require 'rake'
 require 'rake/tasklib'
+require 'fileutils'
+require 'active_support/core_ext/hash/keys'
 
 module MonteCarloRoadmap
   class Task < ::Rake::TaskLib
     include ::Rake::DSL
 
+    DEFAULT_OUTPUT_PATH = File.join(Dir.pwd, 'forecasts')
+
     attr_accessor :input_files
+    attr_accessor :output_path
 
     def initialize(&init_block)
+      @output_path = DEFAULT_OUTPUT_PATH
       init_block.call(self) unless init_block.nil?
 
       raise "Task must be configured to specify input files" if input_files.nil?
@@ -18,6 +24,11 @@ module MonteCarloRoadmap
         task :play do
           simulator = MonteCarloRoadmap::SimulatorBuilder.new.input_files(input_files).build
           results = simulator.play
+
+          if ENV['save']
+            save_results(results)
+          end
+
           print_results(results)
         end
       end
@@ -37,6 +48,13 @@ module MonteCarloRoadmap
           puts "  #{percentile}th percentile: #{pretty_date}" +
                    " (stories: #{percentile_summary[:total_stories]}, weeks: #{percentile_summary[:weeks]})"
         end
+      end
+    end
+
+    def save_results(results)
+      FileUtils.mkdir_p output_path
+      File.open("#{output_path}/forecast.yml", 'w') do |file|
+        file.write results.map{ |result| result.deep_stringify_keys }.to_yaml
       end
     end
   end

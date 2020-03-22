@@ -2,6 +2,7 @@ PATH
   remote: .
   specs:
     monte-carlo-roadmap (0.1.0)
+      activesupport (~> 6.0)
       config (~> 2.2)
       recursive-open-struct (~> 1.1)
 
